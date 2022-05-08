@@ -1,0 +1,144 @@
+<app-header-admin></app-header-admin>
+<div class="content-wrapper">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Ajout</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item">
+              <a href="#" [routerLink]="['/home']">Accueil</a>
+            </li>
+            <li class="breadcrumb-item active">Ajout Livre</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+
+  <div class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="card">
+          <div class="card-body">
+            <form enctype="multipart/form-data" [formGroup]="form" (ngSubmit)="submit()">
+              <div class="form-row">
+                <div class="form-group col-md-12">
+                  <label for="titre">Titre <span>*</span></label>
+                  <input type="text" formControlName="titre" name="titre" class="form-control"
+                    placeholder="titre du livre" id="titre" required />
+                  <div *ngIf="f['titre'].touched && f['titre'].invalid" class="alert alert-danger">
+                    <div *ngIf="f['titre'].errors &&
+                      f['titre'].errors['required']">
+                      titre es obligatoire.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="isbn">ISBN<span>*</span></label>
+                  <input type="text" formControlName="isbn" pattern="[0-9]{3}-[0-9]{1}-[0-9]{2}-[0-9]{4}-[0-9]{1}"
+                    name="isbn" class="form-control" id="isbn" required />
+                  <div *ngIf="f['isbn'].touched && f['isbn'].invalid" class="alert alert-danger">
+                    <div *ngIf="f['isbn'].errors &&
+                      f['isbn'].errors['required']">
+                      isbn est obligatoire
+                    </div>
+                    <div *ngIf="f['isbn'].errors &&
+                      f['isbn'].errors['pattern']">
+                     format IBSN invalide
+                    </div>
+                  </div>
+                  <span>exemple 134-1-01-1111-1</span>
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label for="code">Code <span>*</span></label>
+                  <input type="text" formControlName="code" pattern="[0-9]{4,8}" name="code" class="form-control"
+                    id="code" placeholder="code du livre" required />
+                  <div *ngIf="f['code'].touched && f['code'].invalid" class="alert alert-danger">
+                    <div *ngIf="f['code'].errors &&
+                      f['code'].errors['required']">
+                      code invalide
+                    </div>
+                    <div *ngIf="f['code'].errors &&
+                      f['code'].errors['pattern']">
+                      format code invalide
+                    </div>
+                  </div>
+                  <span>exemple 1234</span>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="date_parution">Date de parution<span>*</span></label>
+                  <input type="date" formControlName="date_parution" name="date_parution" format="DD-MM-YYYY"
+                    class="form-control" id="date_parution" min="1900-01-01" max="2020-12-31" />
+                  <div *ngIf="f['date_parution'].touched &&
+                    f['date_parution'].invalid" class="alert alert-danger">
+                    <div *ngIf="f['date_parution'].errors &&
+                      f['date_parution'].errors['required']">
+                      date parution invalide
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="maison_edition">Maison d'édition <span>*</span></label>
+                  <input type="text" formControlName="maison_edition" pattern="[a-zA-Z0-9_ ]{3,}" name="maison_edition"
+                    class="form-control" id="maison_edition" required />
+                  <div *ngIf="f['date_parution'].touched &&
+                    f['date_parution'].invalid" class="alert alert-danger">
+                    <div *ngIf="f['date_parution'].errors &&
+                      f['date_parution'].errors['required']">
+                         maison edition invalide
+                    </div>
+                    <div *ngIf="f['date_parution'].errors &&
+                      f['date_parution'].errors['pattern']">
+                         format invalide
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="quantite">Quantite<span>*</span></label>
+                  <input type="number" formControlName="quantite" pattern="[0-9]{1,}" class="form-control" id="quantite"
+                    name="quantite" required />
+                  <div *ngIf="f['quantite'].touched && f['quantite'].invalid" class="alert alert-danger">
+                    <div *ngIf="f['quantite'].errors &&
+                      f['quantite'].errors['required']">
+                      quantite invalide
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="categorie">Categorie <span>*</span></label>
+                  <select id="categorie" name="categorie" formControlName="categorie" class="form-control" required>
+                    <option *ngFor="let cate of categories" value="{{ cate.id
+                      }}">{{ cate.nom }}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-12 m-*-auto">
+                  <button type="submit" [disabled]="!form.valid" class="pull-right btn btn-outline-success">
+                    <i class="fa fa-save fa-lg fa-fw"></i>
+                    valider
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

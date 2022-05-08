@@ -1,0 +1,145 @@
+<app-header-admin></app-header-admin>
+<div class="content-wrapper">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Categories</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item">
+              <a href="#" [routerLink]="['/home']">Accueil</a>
+            </li>
+            <li class="breadcrumb-item active">Mettre a jour</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <section class="content">
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header border-transparent">
+              <h3 class="card-title">Categories</h3>
+
+              <div class="card-tools">
+                <button
+                  type="button"
+                  class="btn btn-tool"
+                  data-card-widget="collapse"
+                  title="Collapse"
+                >
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="nom">nom:</label>
+                    <input
+                      formControlName="nom"
+                      id="nom"
+                      [(ngModel)]="categorie.nom"
+                      type="text"
+                      class="form-control"
+                    />
+                    <div
+                      *ngIf="f['nom'].touched && f['nom'].invalid"
+                      class="alert alert-danger"
+                    >
+                      <div
+                        *ngIf="f['nom'].errors && f['nom'].errors['required']"
+                      >
+                        le nom est obligatoire
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- /.form-group -->
+                </div>
+                <!-- /.col -->
+
+                <!-- /.col -->
+              </div>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <input
+            [disabled]="!form.valid"
+            type="submit"
+            value="Modifier"
+            class="btn btn-success float-right"
+          />
+        </div>
+      </div>
+    </form>
+  </section>
+
+  <!-- <div class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="container">
+          <div class="logo" style="text-align: center;">
+            <div
+              class="content-wrapper iframe-mode"
+              data-widget="iframe"
+              data-loading-screen="750"
+            >
+              <div class="tab-content">
+                <div class="container">
+                  <h1>Update Categorie</h1>
+
+                  <a routerLink="/categorie/index" class="btn btn-primary"
+                    >Back</a
+                  >
+
+                  <form [formGroup]="form" (ngSubmit)="submit()">
+                    <div class="form-group">
+                      <label for="nom">nom:</label>
+                      <input
+                        formControlName="nom"
+                        id="nom"
+                        [(ngModel)]="categorie.nom"
+                        type="text"
+                        class="form-control"
+                      />
+                      <div
+                        *ngIf="f['nom'].touched && f['nom'].invalid"
+                        class="alert alert-danger"
+                      >
+                        <div
+                          *ngIf="f['nom'].errors && f['nom'].errors['required']"
+                        >
+                          le nom est obligatoire
+                        </div>
+                      </div>
+                    </div>
+
+                    <button
+                      class="btn btn-success"
+                      type="submit"
+                      [disabled]="!form.valid"
+                    >
+                      Update
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+</div>

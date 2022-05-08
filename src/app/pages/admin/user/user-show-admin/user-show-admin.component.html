@@ -1,0 +1,100 @@
+<app-header-admin>
+</app-header-admin>
+
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Tous</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item">
+            <a href="#" [routerLink]="['/home']">Accueil</a>
+          </li>
+          <li class="breadcrumb-item active"  [routerLink]="['/admin/user/index']" routerLinkActive="router-link-active"  >Liste des etudiants</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <!-- /.container-fluid -->
+</section>
+
+
+<div class="content-wrapper">
+ 
+  <section class="content">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Informations sur l'etudiant: <strong> {{ user.code }} </strong> </h3>
+
+        <div class="card-tools">
+          <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+            <i class="fas fa-minus"></i>
+          </button>
+          
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12 col-md-12 col-lg-12 order-2 order-md-1">
+            <div class="row">
+              <div class="col-12 col-sm-3">
+                <div class="info-box bg-light cardContent">
+                  <div class="info-box-content">
+                    <span class="info-box-text text-center text-muted">prenom et nom</span>
+                    <span class="info-box-number text-center text-muted mb-0">{{user.prenom }} {{user.nom }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-4">
+                <div class="info-box bg-light cardContent">
+                  <div class="info-box-content">
+                    <span class="info-box-text text-center text-muted">date et lieu de naissance</span>
+                    <span class="info-box-number text-center text-muted mb-0">{{ user.dateNaissance | date: 'yyyy-MM-dd'
+                      }} à {{ user.lieuNaissance }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-3">
+                <div class="info-box bg-light cardContent">
+                  <div class="info-box-content">
+                    <span class="info-box-text text-center text-muted"> tel et adresse </span>
+                    <span class="info-box-number text-center text-muted mb-0">{{ user.tel }} {{ user.adresse }} </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-2">
+                <div class="info-box bg-light cardContent">
+                  <div class="info-box-content">
+                    <span class="info-box-text text-center text-muted">genre</span>
+                    <span class="info-box-number text-center text-muted mb-0">{{ user.sexe }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+                <h3> Email </h3>
+                <div class="post">
+                  <div class="user-block">
+                    <img class="img-circle img-bordered-sm" src="assets/dist/img/user1-128x128.jpg" alt="user image" />
+                    <span class="username">
+											<a >{{user.prenom +' '+ user.nom}} </a>
+                   </span>
+                    <h1 class="description"> {{ user.email  }} </h1>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+  </section>
+
+</div>

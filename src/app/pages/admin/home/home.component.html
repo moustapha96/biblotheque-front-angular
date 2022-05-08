@@ -1,0 +1,150 @@
+<app-header-admin></app-header-admin>
+
+
+<div class="content-wrapper">
+  <div class="content-header">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-6"></div>
+				<!-- /.col -->
+				<div class="col-sm-6">
+					<ol class="breadcrumb float-sm-right">
+						<li class="breadcrumb-item">
+							<a href="#">Acceuil</a>
+						</li>
+						<li class="breadcrumb-item active">Tableau de bord</li>
+					</ol>
+				</div>
+				<!-- /.col -->
+			</div>
+			<!-- /.row -->
+		</div>
+		<!-- /.container-fluid -->
+	</div>
+
+<section class="content">
+  <div
+    class="container-fluid">
+    <!-- Info boxes -->
+    <div class="row">
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="info-box">
+          <span class="info-box-icon bg-info elevation-1">
+            <i class="fas fa-book"></i>
+          </span>
+
+          <div class="info-box-content" [routerLink]="['/admin/livre']" routerLinkActive="router-link-active">
+            <span class="info-box-text">livres</span>
+            <span class="info-box-number">
+              {{ livres.length }}
+            </span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+      </div>
+      <!-- /.col -->
+      <div class="col-12 col-sm-6 col-md-3" >
+        <div class="info-box mb-3">
+          <span class="info-box-icon bg-danger elevation-1">
+            <i class="fas fa-archive"></i>
+          </span>
+
+          <div class="info-box-content" [routerLink]="['/admin/categorie']" routerLinkActive="router-link-active">
+            <span class="info-box-text">categorie</span>
+            <span class="info-box-number"> {{ categories.length }} </span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+      </div>
+      <!-- /.col -->
+
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="info-box mb-3">
+          <span class="info-box-icon bg-success elevation-1">
+            <i class="fas fa-user-graduate"></i>
+          </span>
+
+          <div class="info-box-content" [routerLink]="['/admin/emprunt/index']" routerLinkActive="router-link-active">
+            <span class="info-box-text">Emprunts</span>
+            <span class="info-box-number">  {{ emprunts.length }} </span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+      </div>
+      <!-- /.col -->
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="info-box mb-3">
+          <span class="info-box-icon bg-warning elevation-1">
+            <i class="fas fa-users"></i>
+          </span>
+
+          <div class="info-box-content" [routerLink]="['/admin/user']" routerLinkActive="router-link-active" >
+            <span class="info-box-text">Utilisateurs</span>
+            <span class="info-box-number"> {{ etudiants.length }} </span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <div class="row">
+      <div class="col-md-12">
+        <div
+          class="card">
+
+          <!-- /.card-header -->
+          <div class="card-body">
+            <div class="row">
+             
+              <!-- /.col -->
+              <div class="col-md-12">
+                <p class="text-center">
+                  <strong>liste des livres </strong>
+                </p>
+
+                <div class="progress-group" *ngFor="let livre of livres"    >
+                  {{ livre.titre }}
+                  <span class="float-right">
+                    <b> {{ livre.emprunte }} </b>/ {{  emprunts.length }} </span>
+                  <div class="progress progress-sm">
+                    <div class="progress-bar bg-primary"    [style.width.%]=" pourcentage(livre.emprunte,emprunts.length) != 0 ? pourcentage(livre.emprunte,emprunts.length): 0 "  ></div>
+                  </div>
+                </div>
+                
+
+
+                
+              </div>
+              <!-- /.col -->
+            </div>
+            <!-- /.row -->
+            <app-categorie-admin></app-categorie-admin>
+          </div>
+          <!-- ./card-body -->
+          
+           
+              
+           
+            <!-- /.row -->
+        
+          <!-- /.card-footer -->
+        </div>
+        <!-- /.card -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+  <!-- Main row -->
+    <!-- /.row -->
+  </div>
+  <!--/. container-fluid -->
+</section>
+</div>
+

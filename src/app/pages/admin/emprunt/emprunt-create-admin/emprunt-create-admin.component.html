@@ -1,0 +1,98 @@
+<app-header-admin></app-header-admin>
+<div class="content-wrapper">
+
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0">Gestion des emprunts</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="content">
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="card">
+          <div class="card-header text-center">
+            <h1>Nouveau emprunt</h1>
+          </div>
+          <div class="card-body">
+            <form enctype="multipart/form-data" [formGroup]="form" (ngSubmit)="submit()">
+
+              <div class="form-row">
+
+                <div class="form-group col-md-12">
+                  <label for="date_retour">Date de Retour <span>*</span></label>
+                  <input type="date" formControlName="date_retour" name="date_retour" format="DD-MM-YYYY"
+                    class="form-control " id="date_retour" min="{{ dateMin }}">
+                  <div *ngIf="f['date_retour'].touched && f['date_retour'].invalid" class="alert alert-danger">
+                    <div *ngIf="f['date_retour'].errors && f['date_retour'].errors['required']">date non selectionnée</div>
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="form-row">
+
+                <div class="form-group col-md-12">
+                  <label for="livre">Livre  <span>*</span></label>
+                  <select id="livre" name="livre" formControlName="livre" class="form-control" required>
+
+                    <option *ngFor="let livre of livres; " value="{{ livre.id }}"  >
+                              {{  livre.titre }} </option>
+
+                  </select>
+                  <div *ngIf="f['livre'].touched && f['livre'].invalid" class="alert alert-danger">
+                    <div *ngIf="f['livre'].errors && f['livre'].errors['required']">livre non selectionné </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+
+                <div class="form-group col-md-12">
+                  <label for="user">Etudiant <span>*</span></label>
+                  <select id="user" name="user" formControlName="user" class="form-control" required>
+
+                    <option *ngFor="let user of users" value="{{ user.id }}">{{ user.prenom +' '+ user.nom }}</option>
+
+                  </select>
+                  <div *ngIf="f['user'].touched && f['user'].invalid" class="alert alert-danger">
+                    <div *ngIf="f['user'].errors && f['user'].errors['required']">etudiant non selectionné </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+              <div class="form-row">
+
+                <div class="form-group col-12 m-*-auto">
+                  <button type="submit" [disabled]="!form.valid" class="pull-right btn btn-outline-success">
+                    <i class="fa fa-save fa-lg fa-fw"></i>
+                    valider
+                  </button>
+                </div>
+
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

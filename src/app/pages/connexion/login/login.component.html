@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <title>Gestion biblioteque</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
+
+</head>
+
+<body>
+  <!--Main Navigation-->
+  <header>
+    <style>
+      #intro {
+        background-image: url(https://cdn.pixabay.com/photo/2013/07/12/15/20/literature-149713_960_720.png);
+        height: 100vh;
+      }
+
+      /* Height for devices larger than 576px */
+      @media (min-width: 992px) {
+        #intro {
+          margin-top: 5px;
+        }
+      }
+
+      .navbar .nav-link {
+        color: #fff !important;
+      }
+    </style>
+
+
+    <!-- Background image -->
+    <div id="intro" class="bg-image shadow-2-strong">
+
+      <div class="mask d-flex align-items-center h-100" style="background-color: rgba(0, 0, 0, 0.8);">
+        <div class="container">
+
+          <div class="row justify-content-center">
+
+            <div class="col-xl-5 col-md-8">
+
+
+              <form id="formLogin" class="user bg-white rounded shadow-5-strong p-5" [formGroup]="this.loginForm"
+                (ngSubmit)="login()">
+                <div class="row">
+                  <h3>Gestion Bibliotèque </h3>
+                </div>
+
+
+
+
+                <div class=" form-outline mb-4">
+                  <label for="em">Email </label>
+                  <input formControlName="email" id="em" type="text" class="form-control">
+                  <div *ngIf="f['email'].touched && f['email'].invalid" class="alert alert-danger">
+                    <div *ngIf="f['email'].errors && f['email'].errors['required']">email obligatoire</div>
+
+                    <div *ngIf="f['email'].errors && f['email'].errors['email']">format email invalide</div>
+                  </div>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <label for="pass">Password </label>
+                  <input formControlName="password" id="pass" type="password" class="form-control">
+                  <div *ngIf="f['password'].touched && f['password'].invalid" class="alert alert-danger">
+                    <div *ngIf="f['password'].errors && f['password'].errors['required']">mot de passe incorrect</div>
+                  </div>
+                </div>
+
+                <!-- 2 column grid layout for inline styling -->
+                <div class="row mb-2">
+
+                  <div class="col text-center">
+                    <!-- Simple link -->
+                    <a href="" [routerLink]="[ '/inscription' ]" routerLinkActive="active">s'inscrire</a>
+                  </div>
+
+                </div>
+                <div class=" mb-2 col text-center">
+                  <a href="" [routerLink]="['/reset-password']" routerLinkActive="router-link-active">reinitialisation
+                    mot de passe</a>
+                </div>
+
+                <!-- Submit button -->
+
+                <button type="submit" class="btn btn-primary  btn-block"
+                  [disabled]="!loginForm">se connecter</button>
+              </form>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Background image -->
+  </header>
+  <!--Main Navigation-->
+
+
+  <!-- MDB -->
+  <script type="text/javascript" src="assets/login/js/mdb.min.js"></script>
+  <!-- Custom scripts -->
+  <script type="text/javascript" src="assets/login/js/script.js"></script>
+  
+
+</body>
+
+</html>

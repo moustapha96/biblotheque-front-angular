@@ -1,0 +1,158 @@
+
+
+<app-header-admin></app-header-admin>
+
+<div class="content-wrapper">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h5>{{livre.titre}}</h5>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="content">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Informations sur le livre</h3>
+
+        <div class="card-tools">
+          <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+            <i class="fas fa-minus"></i>
+          </button>
+
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
+            <div class="row">
+              <div class="col-12 col-sm-3">
+                <div class="info-box bg-light cardContent">
+                  <div class="info-box-content">
+                    <span class="info-box-text text-center text-muted">Date Parution</span>
+                    <span class="info-box-number text-center text-muted mb-0">{{livre.date_parution | date:
+                      'dd/MM/yyyy'}}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-3">
+                <div class="info-box bg-light cardContent">
+                  <div class="info-box-content">
+                    <span class="info-box-text text-center text-muted">Maison d'edition</span>
+                    <span class="info-box-number text-center text-muted mb-0">{{livre.maison_edition}}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-3">
+                <div class="info-box bg-light cardContent">
+                  <div class="info-box-content">
+                    <span class="info-box-text text-center text-muted">ISBN du livre</span>
+                    <span class="info-box-number text-center text-muted mb-0">{{livre.isbn}}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-3">
+                <div class="info-box bg-light cardContent">
+                  <div class="info-box-content">
+                    <span class="info-box-text text-center text-muted">Exemplaires</span>
+                    <span class="info-box-number text-center text-muted mb-0">{{livre.quantite}}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-3">
+                <div class="info-box bg-light cardContent">
+                  <div class="info-box-content">
+                    <span class="info-box-text text-center text-muted">Emprunts faits</span>
+                    <span class="info-box-number text-center text-muted mb-0">{{livre.emprunte}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <h4>Auteur</h4>
+                <div class="post">
+                  <div class="user-block">
+                    <img class="img-circle img-bordered-sm" src="assets/dist/img/user1-128x128.jpg" alt="user image" />
+                    <!--span class="username">
+											<a href="#">{{livre.auteur}}</a>
+										</span-->
+                    <span class="description">Shared publicly - 7:45 PM today</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.card-body -->
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title" *ngIf="livre.emprunts.length>0">Les emprunteurs de <b>{{livre.titre}}</b></h3>
+
+        <div class="card-tools">
+          <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+            <i class="fas fa-minus"></i>
+          </button>
+
+        </div>
+      </div>
+      <ng-container *ngIf="livre.emprunts.length>0; else elseTemplate">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12">
+              <h4>Historique des emprunts de ce livre </h4>
+              <div class="post" *ngFor="let emprunt of livre.emprunts">
+                <div class="user-block">
+                  <img class="img-circle img-bordered-sm" src="assets/dist/img/user1-128x128.jpg" alt="user image" />
+                  <span class="username">
+                    <a [routerLink]="['/admin/livre/', emprunt.livre.id,
+                        'view']">{{emprunt.user.prenom}} {{emprunt.user.nom}}</a>
+                  </span>
+                  <span class="description">Date d'emprunt : {{emprunt.date_emprunt | date:
+                    'dd/mm/yyyy' }} - Date prevu la remise :
+                    {{emprunt.date_retour | date: 'dd/mm/yyyy'}}
+                  </span>
+                </div>
+                <!-- /.user-block -->
+                <p>
+                  <ng-container *ngIf="emprunt.date_retour_reel !=null; else
+                        elseTemplate">
+                    Rendu le {{emprunt.date_retour_reel | date: 'dd/mm/yyyy'}}
+                  </ng-container>
+                  <ng-template #elseTemplate>
+                    N'a pas encore rendu le livre
+                  </ng-template>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12 col-md-12 col-lg-12 order-3 order-md-3">
+              <div class="row">
+                <div class="col-12 col-sm-12">
+                  <div class="info-box bg-light">
+                    <div class="info-box-content">
+                      <span class="info-box-text text-center text-muted">Personne n'a encore emprunte
+                      </span>
+                      <span class="info-box-number text-center text-muted mb-0">0</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+  </section>
+</div>

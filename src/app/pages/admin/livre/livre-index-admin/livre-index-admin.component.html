@@ -1,0 +1,222 @@
+<app-header-admin></app-header-admin>
+
+
+<div class="content-wrapper">
+  <section class="content-header">
+   
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Gestion des Livres</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item">
+                <a href="#" routerLink="/home">Accueil</a>
+              </li>
+              <li class="breadcrumb-item active">
+                Liste des livres du bibliotheque
+              </li>
+  
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="content">
+
+
+    <div class="card">
+      <div class="card-header">
+        <fieldset class="border p-2">
+          <legend class="float-none w-auto p-2">Recherche</legend>
+          <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+            <div class="form-group form-row">
+
+              <div class="form-group col-md-3">
+                <small>
+                  <label for="isbn">Isbn</label>
+                  <input type="text" class="form-control form-control-sm" formControlName="isbn" name="isbn" id="isbn"
+                    pattern="*[\d]+\-*[\d]+\-*[\d]+\-*[\d]+\-*[\d]">
+
+                  <div *ngIf="f['isbn'].touched && f['isbn'].invalid" class="alert alert-danger">
+
+                    <div *ngIf="f['isbn'].errors &&
+                            f['isbn'].errors['pattern']">
+                      format IBSN invalide
+                    </div>
+                  </div>
+                </small>
+
+
+              </div>
+              <div class="form-group col-md-3">
+                <small>
+                  <label for="isbn">Code</label>
+                  <input type="text" class="form-control form-control-sm" pattern="[0-9]" formControlName="code" name="code"
+                    id="code">
+                  <div *ngIf="f['code'].touched && f['code'].invalid" class="alert alert-danger">
+
+                    <div *ngIf="f['code'].errors &&
+                        f['code'].errors['pattern']">
+                      format code invalide
+                    </div>
+                  </div>
+                </small>
+
+
+              </div>
+
+
+
+              <div class="form-group col-md-3">
+                <small>
+                  <label for="isbn">Titre</label>
+                  <input type="text" class="form-control form-control-sm" formControlName="titre" name="isbn" id="titre">
+                </small>
+
+
+              </div>
+              <div class="form-group col-md-3">
+                <small>
+                  <label for="isbn">Maison d'édition</label>
+                  <input type="text" class="form-control form-control-sm" formControlName="maison_edition" name="maison_edition"
+                    id="maison_edition">
+                </small>
+
+
+              </div>
+
+            </div>
+
+            <div class=" form-row justify-content-center ">
+
+              <button type="submit" class="col-md-12" btn-lg btn-block class="btn-sm fa-pull-right btn btn-outline-primary">
+                <i class="fa fa-search fa-lg fa-fw"></i> Rechercher
+              </button>
+            </div>
+
+          </form>
+
+
+        </fieldset>
+      </div>
+      <div class="card-body" *ngIf="livres.length == 0">
+        <div class="row">
+          <div class="col-12 col-md-12 col-lg-12 order-3 order-md-3">
+            <div class="row">
+              <div class="col-12 col-sm-12">
+                <div class="info-box bg-light">
+                  <div class="info-box-content">
+                    <span class="info-box-text text-center text-muted">aucun livre trouvé</span>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body" *ngIf="livres.length != 0">
+
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered table-striped table-hover" id="example" datatable [dtOptions]="dtOptions"
+              [dtTrigger]="dtTrigger">
+              <thead>
+                <tr>
+                  <th style="font-size: 0.75rem;width: 10px">
+                    #
+                  </th>
+                  <th style="font-size: 0.75rem;width: 70px">
+                    Isnb
+                  </th>
+
+                  <th style="font-size: 0.75rem;width: 180px">
+                    Titre
+                  </th >
+                  <th class="text-center" style="font-size: 0.75rem;width: 50px">
+                    Date parution
+                  </th>
+                  <th class="text-center" style="font-size: 0.75rem;width: 40px">
+                    Maison Edition
+                  </th>
+                  <th class="text-center" style="font-size: 0.75rem;width: 65px">
+                    quantite
+                  </th>
+                  <th class="project-actions text-right"  style="font-size: 0.75rem;width: 50px">
+                    Actions
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <tr *ngFor="let livre of livres | paginate: config">
+                  <td>
+                    {{livre.id}}
+                  </td>
+                  <td style="font-size: 0.75rem;width: 100px">
+                    {{livre.isbn}}
+                    <br> <span style="font-size: 0.70rem; "> <b> code : {{ livre.code }} </b></span>
+                  </td>
+
+                  <td>
+                    {{livre.titre}}
+                    <br> <span style="font-size: 0.70rem; "> <b> categorie : {{ livre.categorie.nom }} </b></span>
+                  </td>
+                  <td style="font-size: 0.75rem" >{{livre.date_parution | date: "yyyy-MM-dd" }}</td>
+                  <td style="font-size: 0.85rem">{{ livre.maison_edition }}</td>
+                  <td>{{livre.quantite}}
+                    <br> <span style="font-size: 0.70rem; "> <b> nbre emprunt : {{ livre.emprunte }} </b></span>
+                  </td>
+
+                  <td class="project-actions text-right">
+                    <a class="btn btn-primary btn-sm" [routerLink]="['/livre/', livre.id, 'view']" href="#">
+                      <i class="fas fa-eye"></i>
+                    </a>
+                    <a *ngIf="livre.emprunte == 0" class="btn btn-info btn-sm"
+                      [routerLink]="['/livre/', livre.id, 'edit']">
+                      <i class="fas fa-pencil-alt"></i>
+                    </a>
+                    <a class="btn btn-danger btn-sm" (click)="deleteLivre(livre.id)">
+                      <i class="fas fa-trash"></i>
+                    </a>
+                  </td>
+                </tr>
+
+
+              </tbody>
+            </table>
+          </div>
+
+
+          <div class="text-center">
+            <!-- <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls> -->
+
+            <pagination-controls [maxSize]="maxSize" [directionLinks]="directionLinks" [autoHide]="autoHide"
+              [responsive]="responsive" [previousLabel]="labels.previousLabel" [nextLabel]="labels.nextLabel"
+              [screenReaderPaginationLabel]="labels.screenReaderPaginationLabel"
+              [screenReaderPageLabel]="labels.screenReaderPageLabel"
+              [screenReaderCurrentLabel]="labels.screenReaderCurrentLabel" (pageChange)="pageChanged($event)">
+            </pagination-controls>
+          </div>
+
+
+
+
+        </div>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-block " [routerLink]="['/admin/livre/create']"
+          routerLinkActive="router-link-active">nouveau livre</button>
+      </div>
+
+    </div>
+  </section>
+
+</div>

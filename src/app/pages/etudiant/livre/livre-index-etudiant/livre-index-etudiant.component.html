@@ -1,0 +1,150 @@
+<app-header-user></app-header-user>
+
+<div class="content-wrapper">
+
+  <div class="content">
+    <div class="container-fluid">
+      <div class="row">
+
+        <form [formGroup]="formSearch" (ngSubmit)="onSubmit()">
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label for="isbn">Rechercher pa ISBN</label>
+              <input type="text" formControlName="isbn" name="isbn" class="form-control" placeholder="ISBN du livre"
+                id="isbn" pattern="*[\d]+\-*[\d]+\-*[\d]+\-*[\d]+\-*[\d]"   /> 
+              <div *ngIf="fS['isbn'].touched && fS['isbn'].invalid" class="alert alert-danger">
+
+                <div *ngIf="fS['isbn'].errors &&
+                        fS['isbn'].errors['pattern']">
+                  format invalide
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-12   m-*-auto">
+              <button type="submit" class=" fa-pull-right btn btn-outline-primary">
+                <i class="fa fa-search fa-lg fa-fw"></i>
+
+              </button>
+            </div>
+          </div>
+        </form>
+
+        <div class="container" *ngIf="livres.length == 0">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12 col-md-12 col-lg-12 order-3 order-md-3">
+                <div class="row">
+                  <div class="col-12 col-sm-12">
+                    <div class="info-box bg-light">
+                      <div class="info-box-content">
+                        <span class="info-box-text text-center text-muted">aucun livre trouvé</span>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="container">
+          <div class="logo" style="text-align: center">
+
+            <div class="row">
+              <div class="card-body col-sm-6 col-12 col-md-4" 
+                *ngFor="let livre of livres">
+
+                <div class="card-content">
+                  <div class="m-4">
+                    <div class="card" style="width: 200px; height: 400px;">
+                      <img src="assets/dist/img/image.jpg" alt="User Image" />
+                      <div class="card-body text-center">
+
+                        <p class="card-text">
+                          <span class="users-list-date">
+                            <h6>{{livre.titre}}</h6>
+
+                            <div class="widget-26-job-starred
+                              btn-group">
+                              <a class="btn
+                                btn-outline-dark" type="button" [routerLink]="['/etudiant/livre/', livre.id,
+                                'view']">
+                                <i class="fa fa-eye" aria-hidden="true"></i>
+                              </a>
+                            </div>
+                          </span>
+
+                        </p>
+                        <div class="widget-26-job-salary">
+                          <strong *ngIf=' livre.quantite <= 0 '>non
+                            dsponible </strong>
+                            
+
+
+
+                          <a *ngIf="livre.quantite > livre.emprunte " data-toggle="modal" [attr.data-target]="'#Model'+livre.id"
+                            (click)="empruntEnclencher(livre.id)" class="btn
+                            btn-outline-info " type="submit">
+                            emprunter
+                            <i class="fa fa-save"></i> </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div #addEditUserModal id="Model{{livre.id}}" class="modal fade" tabindex="-1" role="dialog"
+                  aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title" id="modal-title">Veillez entrer la date date de retour de votre emprunt
+                        </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="container">
+
+
+                          <div class="form-row">
+                            <div class="form-group col-md-12">
+                              <input type="date" (change)="onChangeDateValue($event)" name="dateRetour"
+                                format="DD-MM-YYYY" class="form-control " id="dateRetour" min="{{ dateMin }}" required>
+
+                            </div>
+                          </div>
+                          <div class="form-row">
+                            <div class="form-group col-12 m-*-auto">
+                              <button (click)="submit()" data-dismiss="modal"
+                                class="pull-right btn btn-outline-success">
+                                <i class="fa fa-save fa-lg fa-fw"></i>
+                                valider
+                              </button>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="livres.length>0" class="pagination"></div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

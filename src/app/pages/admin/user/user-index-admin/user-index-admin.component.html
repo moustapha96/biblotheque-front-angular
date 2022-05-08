@@ -1,0 +1,207 @@
+<app-header-admin></app-header-admin>
+<div class="content-wrapper">
+
+	<section class="content-header">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-6">
+					<h1>Gestion des étudiants</h1>
+				</div>
+				<div class="col-sm-6">
+					<ol class="breadcrumb float-sm-right">
+						<li class="breadcrumb-item">
+							<a href="#" [routerLink]="['/home']">Accueil</a>
+						</li>
+
+					</ol>
+				</div>
+			</div>
+		</div>
+		<!-- /.container-fluid -->
+	</section>
+
+
+	<section class="content">
+		<div class="card">
+
+			<div class="card-header border-transparent">
+				<h3 class="card-title">Liste des Etudiants</h3>
+
+				<div class="card-tools">
+					<button type="button" class="btn btn-tool" data-card-widget="collapse">
+						<i class="fas fa-minus"></i>
+					</button>
+
+				</div>
+			</div>
+			<!-- /.card-header -->
+			<div class="card-body p-0">
+				<div class="table-responsive">
+					<table class="table table-bordered table-striped table-hover" id="example" datatable
+						[dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+						<thead>
+							<tr>
+								<th>code</th>
+								<th>Prenom & Nom</th>
+								<th>
+									Date naissance</th>
+
+								<th>email</th>
+								<th>Status</th>
+								<th class="project-actions text-right">blocage</th>
+								<th class="project-actions text-right">option</th>
+							</tr>
+						</thead>
+						<tbody>
+
+							<tr *ngFor="let etudiant of users">
+
+								<td> <a class="btn" [routerLink]="['/admin/user/'+ etudiant.id + '/view']">
+										<small> {{etudiant.code }} </small> </a> </td>
+								<td>{{etudiant.prenom}} {{etudiant.nom}}</td>
+								<td>{{etudiant.dateNaissance | date: 'dd/mm/yyyy' }}</td>
+
+								<td>{{etudiant.email}}</td>
+
+								<ng-container *ngIf="etudiant.active==true; else elseTemplate">
+									<td>
+										<span class="badge badge-success" style="width:60px">Actif</span>
+									</td>
+									<td class="project-actions text-right">
+										<a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modelId"
+											(click)="enclencher(etudiant.id)">
+											<i class="fas fa-lock"></i>
+											Bloquer
+										</a>
+									</td>
+								</ng-container>
+
+								<ng-template #elseTemplate>
+
+									<td><span class="badge badge-danger" style="width:60px">Bloque</span></td>
+									<td class="project-actions text-right">
+										<a class="btn btn-warning btn-sm" data-toggle="modal"
+											data-target="#Modelunblocke" type="submit"
+											(click)="enclencher(etudiant.id)">
+											<i class="fas fa-unlock"></i>
+											debloquer
+										</a>
+									</td>
+								</ng-template>
+
+								<td>
+									<div class="btn-group small ">
+										<a [routerLink]="['/admin/user/'+etudiant.id+'/edit']"
+											routerLinkActive="router-link-active" class=" btn btn-outline-warning"> <i
+												class="fa fa-edit" aria-hidden="true"></i> </a>
+
+										<a [routerLink]="['/admin/user/'+etudiant.id+'/view']"
+											routerLinkActive="router-link-active" class=" btn  btn-outline-dark"> <i
+												class="fa fa-eye" aria-hidden="true"></i> </a>
+									</div>
+
+								</td>
+
+							</tr>
+
+
+						</tbody>
+					</table>
+				</div>
+				<!-- /.table-responsive -->
+			</div>
+			<!-- /.card-body -->
+			<div class="card-footer clearfix">
+				<a [routerLink]="['/admin/user/create']" routerLinkActive="router-link-active"
+					class="btn btn-sm btn-block  float-left">Ajouter un nouveau Etudiant</a>
+
+			</div>
+			<!-- /.card-footer -->
+		</div>
+
+
+		<div id="Modelunblocke" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+
+
+						<h3 class="modal-title" id="modal-title">Voulez-vous vraiment debloquer
+							<b id="etudiant"></b>
+							?
+						</h3>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+						<button type="button" type="submit" data-dismiss="modal" class="btn
+		  btn-primary" (click)="unblock()">oui</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+
+
+		<!-- Modal -->
+		<div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+			aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h3 class="modal-title" id="modal-title">Voulez-vous vraiment bloquer
+							<b id="etudiant"></b>
+							?
+						</h3>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+						<button type="button" type="submit" data-dismiss="modal" class="btn
+					  btn-primary" (click)="block()">oui</button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<script>
+			$('#exampleModal').on('show.bs.modal', event => {
+				var button = $(event.relatedTarget);
+				var modal = $(this);
+				// Use above variables to manipulate the DOM
+
+			});
+		</script>
+
+		<script>
+			$('#example').dataTable({
+				// "order": [[0, 'desc']]
+				"columnDefs": [
+					{ "orderable": false, "targets": 0 }
+				]
+			});
+		</script>
+
+
+
+
+
+
+
+
+
+
+
+	</section>
+
+
+
+</div>

@@ -1,0 +1,108 @@
+<app-header-admin></app-header-admin>
+
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Recherche </h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">
+                            <a href="#" [routerLink]="['/admin/home']">Accueil</a>
+                        </li>
+                        <li class="breadcrumb-item active">Recherche un livre</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="card">
+                    <div class="card-body">
+                        <form enctype="multipart/form-data" [formGroup]="form" (ngSubmit)="onSubmit()">
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label for="isbn">Rechercher pa ISBN</label>
+                                    <input type="text" formControlName="isbn" name="isbn" class="form-control"
+                                        placeholder="ISBN du livre" id="isbn"
+                                        pattern="*[\d]+\-*[\d]+\-*[\d]+\-*[\d]+\-*[\d]" />
+                                    <div *ngIf="f['isbn'].touched && f['isbn'].invalid" class="alert alert-danger">
+
+                                        <div *ngIf="f['isbn'].errors &&
+                                                 f['isbn'].errors['pattern']">
+                                            format invalide
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-12   m-*-auto">
+                                    <button type="submit" class=" fa-pull-right btn btn-outline-primary">
+                                        <i class="fa fa-search fa-lg fa-fw"></i>
+                                        rechercher
+                                    </button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="container" *ngIf="livres.length == 0">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12 col-md-12 col-lg-12 order-3 order-md-3">
+                                    <div class="row">
+                                        <div class="col-12 col-sm-12">
+                                            <div class="info-box bg-light">
+                                                <div class="info-box-content">
+                                                    <span class="info-box-text text-center text-muted">aucun livre
+                                                        trouvé</span>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="card" *ngIf="livres.length != 0">
+
+                        <div class="card-body">
+                            <h3 class="mt-3">Vos résulats de recherche :</h3>
+                            <div class="card-body">
+                                <div>
+                                    <div class="mt-3 p-3 bg-light border rounded" *ngFor="let livre of livres">
+                                        <span> isbn: {{ livre.isbn }} </span>
+                                        <a [routerLink]="['/livre/', livre.id, 'view']"
+                                            routerLinkActive="router-link-active">
+                                            <h5 class="text-dark"><i
+                                                    class="bi bi-arrow-down-right-square-fill text-primary"></i>
+                                                <span> titre : </span> {{ livre.titre }}
+                                            </h5>
+                                            <div class="text-dark small p-1 text-bold rounded">
+                                                publié le {{ livre.date_parution | date: "dd/mm/yyyy" }}
+                                                par la maison d'édition : {{ livre.maison_edition }}
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

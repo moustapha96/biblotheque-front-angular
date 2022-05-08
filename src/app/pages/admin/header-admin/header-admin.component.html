@@ -1,0 +1,185 @@
+<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" data-widget="pushmenu"  role="button"><i class="fas fa-bars"></i></a>
+    </li>
+    <li class="nav-item d-none d-sm-inline-block">
+      <a href="" class="nav-link">Acceuil</a>
+    </li>
+  </ul>
+
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" data-widget="navbar-search" role="button">
+        <i class="fas fa-search"></i>
+      </a>
+      <div class="navbar-search-block">
+        <form class="form-inline">
+          <div class="input-group input-group-sm">
+            <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search" />
+            <div class="input-group-append">
+              <button class="btn btn-navbar" type="submit">
+                <i class="fas fa-search"></i>
+              </button>
+              <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" data-bs-toggle="tooltip" title="retour" (click)="back()" role="button">
+        <i class="fas fa-backspace"></i>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" (click)="logout()"  data-bs-toggle="tooltip" title="déconnexion" href="" role="button">
+        <i class="fas fa-sign-out-alt"></i>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+        <i class="fas fa-expand-arrows-alt"></i>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+        <i class="fas fa-th-large"></i>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <a  class="brand-link">
+    <img src="assets/dist/img/bilioLogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+      style="opacity: 0.8;" />
+    <span class="brand-text font-weight-light">Gestion Biblio</span>
+  </a>
+
+  <div class="sidebar">
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="image">
+        <img src="assets/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" />
+      </div>
+      <div class="info">
+        <div  *ngIf="user != null" >  
+        <a href="" [routerLink]="['/admin/home']" routerLinkActive="router-link-active" class="d-block"> 
+          {{ user.prenom
+          }} {{ user.nom }} </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-inline">
+      <div class="input-group" data-widget="sidebar-search">
+        <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search" />
+        <div class="input-group-append">
+          <button class="btn btn-sidebar">
+            <i class="fas fa-search fa-fw"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="tree" role="menu" data-accordion="false">
+        <div>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/admin/recherche']" routerLinkActive="router-link-active">
+              <i class="nav-icon fas fa-search"></i>
+              <p>recherche</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                gestion des categories
+              </p>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" [routerLink]="['/admin/categorie/create']">
+                <p>ajout</p>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" [routerLink]="['/admin/categorie/index']">
+                <p>liste</p>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" [routerLink]="['/admin/categorie/catalogue']">
+                <p>catalogue</p>
+              </a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                gestion des livres
+
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" [routerLink]="['/admin/livre/create']">
+                <p>ajout</p>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" [routerLink]="['/admin/livre/index']">
+                <p>liste</p>
+              </a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                gestion des emprunts
+
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" [routerLink]="['/admin/emprunt/create']">
+                <p>ajout</p>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" [routerLink]="['/admin/emprunt/index']">
+                <p>liste</p>
+              </a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                gestion des etudiants
+
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" [routerLink]="['/admin/user/create']">
+                <p>ajout</p>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" [routerLink]="['/admin/user/index']">
+                <p>liste</p>
+              </a>
+            </div>
+          </li>
+
+
+        </div>
+      </ul>
+
+
+
+
+
+    </nav>
+  </div>
+</aside>

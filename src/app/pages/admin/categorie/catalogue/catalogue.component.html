@@ -1,0 +1,159 @@
+<app-header-admin></app-header-admin>
+
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Catalogue</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item">
+                        <a href="#" [routerLink]="['/home']">Accueil</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+   
+</section>
+
+
+<div class="content-wrapper">
+
+
+
+    <section class="content">
+        
+        <div class="card" *ngFor="let categorie of categories"  >
+            <div class="card-header">
+                <h3 class="card-title">Categorie : <strong> {{ categorie.nom }} </strong> </h3>
+
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-striped table-hover" datatable [dtOptions]="dtOptions"
+            [dtTrigger]="dtTrigger">
+            <thead>
+              <tr>
+                <th>
+                  #
+                </th>
+                <th>
+                  Isnb
+                </th>
+
+                <th>
+                  Titre
+                </th>
+                <th class="text-center">
+                  Date parution
+                </th>
+                <th class="text-center">
+                  Maison Edition
+                </th>
+                <th class="text-center">
+                  quantite
+                </th>
+               
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let livre of categorie.livres">
+                <td>
+                  {{livre.id}}
+                </td>
+                <td style="font-size: 0.75rem;width: 150px">
+                  {{livre.isbn}}
+                  <br> <span style="font-size: 0.70rem; "> <b> code : {{ livre.code }} </b></span>
+                </td>
+
+                <td>
+                  {{livre.titre}}
+                  <br> <span style="font-size: 0.70rem; "> <b> categorie : {{ livre.categorie.nom }} </b></span>
+                </td>
+                <td>{{livre.date_parution | date: "yyyy-MM-dd" }}</td>
+                <td>{{ livre.maison_edition }}</td>
+                <td>{{livre.quantite}}
+                  <br> <span style="font-size: 0.70rem; "> <b> nbre emprunt : {{ livre.emprunte }} </b></span>
+                </td>
+
+                
+              </tr>
+            </tbody>
+          </table>
+                <!-- <div class="row" *ngFor="let livre of categorie.livres ">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Titre : <strong> {{ livre.titre }} </strong> </h3>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="col-12 col-md-12 col-lg-12  ">
+                                <div class="row">
+                                    <div class="col-12 col-sm-3">
+                                        <div class="info-box bg-light cardContent">
+                                            <div class="info-box-content">
+                                                <span class="info-box-text text-center text-muted">Date Parution</span>
+                                                <span class="info-box-number text-center text-muted mb-0">{{
+                                                    livre.date_parution
+                                                    | date:
+                                                    'dd/MM/yyyy'}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-3">
+                                        <div class="info-box bg-light cardContent">
+                                            <div class="info-box-content">
+                                                <span class="info-box-text text-center text-muted">Maison
+                                                    d'edition</span>
+                                                <span class="info-box-number text-center text-muted mb-0">{{
+                                                    livre.maison_edition}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-3">
+                                        <div class="info-box bg-light cardContent">
+                                            <div class="info-box-content">
+                                                <span class="info-box-text text-center text-muted">ISBN du livre</span>
+                                                <span
+                                                    class="info-box-number text-center text-muted mb-0">{{livre.isbn}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-sm-3">
+                                        <div class="info-box bg-light cardContent">
+                                            <div class="info-box-content">
+                                                <span class="info-box-text text-center text-muted">Emprunts faits</span>
+                                                <span
+                                                    class="info-box-number text-center text-muted mb-0">{{livre.emprunte}}
+                                                    / {{livre.quantite}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div> -->
+            </div>
+            
+        </div>
+    </section>
+
+</div>

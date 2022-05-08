@@ -1,0 +1,140 @@
+<app-header-admin></app-header-admin>
+
+<div class="content-wrapper">
+
+
+    <div class="content">
+        <div class="container-fluid">
+
+            <div class="logo" style="text-align: center" *ngIf="emprunt">
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <h1 class="m-0">Emprunt </h1>
+                            </div>
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li class="breadcrumb-item"><a [routerLink]="['/home']"
+                                            routerLinkActive="router-link-active">Home</a></li>
+                                    <li class="breadcrumb-item" routerLink="/emprunt/index">
+                                        liste des emprunts
+                                    </li>
+
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="p-5 bg-white rounded shadow mb-5">
+                            <!-- Lined tabs-->
+                            <ul id="myTab2" role="tablist"
+                                class="nav nav-tabs nav-pills with-arrow lined flex-column flex-sm-row text-center">
+                                <li class="nav-item flex-sm-fill">
+                                    <a id="home2-tab" data-toggle="tab" href="#home2" role="tab" aria-controls="home2"
+                                        aria-selected="true"
+                                        class="nav-link text-uppercase font-weight-bold mr-sm-3 rounded-0 active">Etudiant</a>
+                                </li>
+                                <li class="nav-item flex-sm-fill">
+                                    <a id="profile2-tab" data-toggle="tab" href="#profile2" role="tab"
+                                        aria-controls="profile2" aria-selected="false"
+                                        class="nav-link text-uppercase font-weight-bold mr-sm-3 rounded-0">livre</a>
+                                </li>
+                                <li class="nav-item flex-sm-fill">
+                                    <a id="contact2-tab" data-toggle="tab" href="#contact2" role="tab"
+                                        aria-controls="contact2" aria-selected="false"
+                                        class="nav-link text-uppercase font-weight-bold rounded-0">emprunt</a>
+                                </li>
+                            </ul>
+                            <div id="myTab2Content" class="tab-content">
+                                <div id="home2" role="tabpanel" aria-labelledby="home-tab"
+                                    class="tab-pane fade px-4 py-5 show active">
+                                    <div class="card">
+                                        <div
+                                            class="  ">
+                                            <div class="row p-2">
+                                                <div class="row col-md-12  justify-content-center " > code : <strong> {{ emprunt.user.code }} </strong> </div>
+                                                <div class="col-md-6">
+                                                    <div>
+                                                        <p>  <strong>prenom & nom : </strong> : {{
+                                                            emprunt.user.prenom +' '+ emprunt.user.nom }}</p>
+                                                    </div>
+                                                    <div>
+                                                        <p>  <strong>TEL </strong> : {{ emprunt.user.tel  }}</p>
+                                                    </div>
+                                                    <div>
+                                                        <p> <strong>lieu de naissance :  </strong> {{ emprunt.user.lieuNaissance  }}</p>
+                                                    </div>
+                                                    
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div>
+                                                        <p>  <strong>genre</strong> : {{ emprunt.user.sexe  }}</p>
+                                                    </div>
+                                                    <div>
+                                                        <p>  <strong>adresse </strong> : {{ emprunt.user.adresse  }}</p>
+                                                    </div>
+                                                    <div>
+                                                        <p> <strong>date de naissance  :</strong> {{ emprunt.user.dateNaissance | date: 'dd-mm-yyyy'  }}</p>
+                                                    </div>
+                                                    
+                                                </div>
+                                                <div class="row  justify-content-center"> 
+                                                    <div>
+                                                    <p>  <strong>Email :</strong> {{ emprunt.user.email  }}</p>
+                                                </div>
+                                                </div>
+                                            </div>
+                                            <div class=" d-flex mt-2 justify-content-center align-items-center" > <a class="btn  card-footer btn-block" 
+                                                [routerLink]="['/admin/user/'+emprunt.id+'/edit']"
+                                                routerLinkActive="router-link-active">
+                                                Profile</a> </div>
+                                             
+
+                                        </div>
+                                    </div>
+                                   
+                                </div>
+                                <div id="profile2" role="tabpanel" aria-labelledby="profile-tab"
+                                    class="tab-pane fade px-4 py-5">
+                                    <div>
+                                        <p>  <strong>Code livre</strong> : {{ emprunt.livre.code  }}</p>
+                                    </div>
+                                    <div>
+                                        <p>  <strong>categorie </strong> : {{ emprunt.livre.categorie.nom  }}</p>
+                                    </div>
+                                    <div>
+                                        <p> <strong>titre  </strong> {{ emprunt.livre.titre  }}</p>
+                                    </div>
+                                    <div>
+                                        <p>  <strong>date parution </strong> {{ emprunt.livre.date_parution | date: 'dd-mm-yyyy' }}</p>
+                                    </div>
+                                </div>
+                                <div id="contact2" role="tabpanel" aria-labelledby="contact-tab"
+                                    class="tab-pane fade px-4 py-5">
+                                    <div>
+                                       
+                                        <p>  <strong>date Empunt</strong> : {{ emprunt.date_emprunt | date: 'dd-mm-yyyy' }}</p>
+                                    </div>
+
+                                    <div>
+                                       
+                                        <p> <strong>date de retour prevu : </strong> {{ emprunt.date_retour | date: 'dd-mm-yyyy' }}</p>
+                                    </div>
+                                    <div>
+                                      
+                                        <p>  <strong>date de retour reel : </strong> {{ emprunt.date_retour_reel | date: 'dd-mm-yyyy' }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End lined tabs -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
